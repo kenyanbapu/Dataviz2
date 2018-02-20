@@ -13,13 +13,13 @@ Just here as a placeholder really
 function buildDropdown() {
     var selDataset = document.getElementById("selDataset");
 
-    Plotly.d3.json('/names', function(error, data){
+    Plotly.d3.json('/incident_types', function(error, data){
         if (error) return console.warn(error);
         for (i = 0; i < data.length; i++) {
-                    SampleName=data[i]
+                    IncidentType=data[i]
                     var selDatasetItem = document.createElement("option");
-                    selDatasetItem.text=SampleName;
-                    selDatasetItem.value=SampleName;
+                    selDatasetItem.text=IncidentType;
+                    selDatasetItem.value=IncidentType;
                     selDataset.appendChild(selDatasetItem);
                 }
     }
@@ -37,6 +37,7 @@ PIE CHART
 Initialize with default sampleID = BB_940
 
 */
+/*
 
 function getPieChartData(data) {
     console.log(data.samples)
@@ -162,10 +163,13 @@ function updatePieChart(newdata) {
         })
         
     }
-
+*/
 
 
 /*this is triggered when an option is selected from the dropdown*/
+
+/*
+
 function optionChanged(sampleID) {
   
     //console.log(sampleID)
@@ -175,12 +179,12 @@ function optionChanged(sampleID) {
 
     //buildPie(sampleID)
     
-    updatePieChart(sampleID)
-    updateBubbleChart(sampleID)
-    getMetadata(sampleID)
+    //updatePieChart(sampleID)
+    //updateBubbleChart(sampleID)
+    //getMetadata(sampleID) 
 
-    }
-
+    //} 
+/*
 
 function buildPlot(sampleID) {
     url = '/samples/'+sampleID
@@ -213,3 +217,4 @@ function buildPlot(sampleID) {
 }
 
 buildPlot('BB_940');
+*/

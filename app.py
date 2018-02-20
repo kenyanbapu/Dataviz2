@@ -1,6 +1,4 @@
-# import necessary libraries
-import numpy as np
-
+# import libraries
 from flask import (
     Flask,
     render_template,
@@ -42,13 +40,17 @@ def incident_types():
         incident_types.append(row.title())
     return(jsonify(incident_types))    
 
-#@TODO: route that filters data by incident type
+#This route filters data by incident type
+#It casts everything to uppercase so that the input is not case sensitive (e.g., /data/crash urgent)
 @app.route("/data/<incident_type>")
 def data_by_incident_type(incident_type):
-    #figure this out
-    # data=pd.read_csv("DataSources/traffic_data_clean.csv")
-    #return(jsonify(data.to_dict()))  
-    return None
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
+    incident_type_lookup=incident_type.upper()
+    for i in range(0,len(data)):
+        data['Issue Reported'].replace(to_replace=data['Issue Reported'].iloc[i],value=data['Issue Reported'].iloc[i].upper(),inplace=True)
+
+    output=data[data['Issue Reported']==incident_type_lookup]
+    return(jsonify(output.to_dict()))
 
 #@TODO: route that filters data by incident type and date
 @app.route("/data/<start>")
