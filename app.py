@@ -1,6 +1,4 @@
-# import necessary libraries
-import numpy as np
-
+# import libraries
 from flask import (
     Flask,
     render_template,
@@ -9,6 +7,8 @@ from flask import (
     redirect)
 
 import pandas as pd
+
+from datetime import datetime
 
 #################################################
 # Flask Setup
@@ -42,28 +42,35 @@ def incident_types():
         incident_types.append(row.title())
     return(jsonify(incident_types))    
 
-#@TODO: route that filters data by incident type
+#This route filters data by incident type
+#It casts everything to uppercase so that the input is not case sensitive (e.g., /data/crash urgent)
+#note that it's ok for the route to have spaces in it: 'http://localhost:5000/data/crash urgent' autocorrects the space so that it's http://localhost:5000/data/crash%20urgent, and it works ~~~
 @app.route("/data/<incident_type>")
 def data_by_incident_type(incident_type):
-    #figure this out
-    # data=pd.read_csv("DataSources/traffic_data_clean.csv")
-    #return(jsonify(data.to_dict()))  
-    return None
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
+    incident_type_lookup=incident_type.upper()
+    for i in range(0,len(data)):
+        data['Issue Reported'].replace(to_replace=data['Issue Reported'].iloc[i],value=data['Issue Reported'].iloc[i].upper(),inplace=True)
 
-#@TODO: route that filters data by incident type and date
-@app.route("/data/<start>")
+    output=data[data['Issue Reported']==incident_type_lookup]
+    return(jsonify(output.to_dict()))
+
+#pass in start date in the format YYYYMMDD e.g. 20180101
+@app.route("/api/v1.0/<start>")
 def data_by_start_date(start):
-    #figure this out
-    # data=pd.read_csv("DataSources/traffic_data_clean.csv")
-    #return(jsonify(data.to_dict()))  
-    return None
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
+    output=data[data['Published Date as Integer']>int(start)]
+    return(jsonify(output.to_dict()))
 
-@app.route("/data/<start>/<end>")
+@app.route("/api/v1.0/<start>/<end>")
 def data_by_start_and_end_date(start,end):
-    #figure this out
-    # data=pd.read_csv("DataSources/traffic_data_clean.csv")
-    #return(jsonify(data.to_dict()))  
-    return None
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
+    output=data[(data['Published Date as Integer']>=int(start)) & (data['Published Date as Integer']<=int(end))]
+    return(jsonify(output.to_dict()))
+
+#Ideally we would have the route set up so that start date, end date, and incident type are all optional parameters
+#but idk how to do that and I am done working tonight
+#sry y'all (Emily)
 
 if __name__ == "__main__":
     app.run(debug=True)

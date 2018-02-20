@@ -20,7 +20,9 @@
 
     <h1>Super Good Data</h1>
     <h2>Insert super good dashboard things here</h2>
-
+    <hr>
+    <select class="row" id="selDataset" onchange="optionChanged(this.value)"></select>
+    <div id="pie"></div>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>

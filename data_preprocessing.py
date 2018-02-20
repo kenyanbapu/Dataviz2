@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 data=pd.read_csv("DataSources/traffic_data.csv")
 
@@ -7,19 +8,15 @@ data=data[data['Published Date'].notnull()]
 
 dates=data['Published Date']
 
-dates_as_string=[]
-dates_as_datetime=[]
+dates_as_integer=[]
 
 for date in dates:
     try:
-        date_as_string=date.split(" ")[0]
-        dates_as_string.append(date_as_string)
-        dates_as_datetime.append(datetime.strptime(date_as_string,'%m/%d/%Y'))
+        datetimeobject=datetime.strptime(date.split(" ")[0],'%m/%d/%Y')
+        dates_as_integer.append(datetimeobject.strftime("%Y%m%d"))
     except AttributeError:
-        dates_as_string.append(None)
-        dates_as_datetime.append(None)
+        dates_as_integer.append(None)
 
-data['Published Date as String']=dates_as_string
-data['Published Date as DateTime']=dates_as_datetime
+data['Published Date as Integer']=dates_as_integer
 
 data.to_csv("DataSources/traffic_data_clean.csv")
