@@ -27,6 +27,30 @@ function buildDropdown() {
 
 buildDropdown()
 
+function buildMap() {
+    var selDataset = document.getElementById("selDataset");
+
+    Plotly.d3.json("/data", function(error, data){
+        console.log(data)
+
+                })
+    }
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-97.7, 30.26]),
+            zoom: 10
+        })
+
+})
+
+buildMap()
 
 
 
