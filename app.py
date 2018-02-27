@@ -28,8 +28,9 @@ def home():
 # This route returns all the damn data
 @app.route("/data")
 def data():
-    data=pd.read_csv("DataSources/traffic_data_clean.csv")
-    return(jsonify(data.to_dict()))    
+    output=pd.read_csv("DataSources/traffic_data_clean.csv")
+    json = output.reset_index(drop=True).to_json(orient="records")
+    return(json)  
 
 # This route returns a list of all distinct incident types (for filtering)
 @app.route("/incident_types")
@@ -53,7 +54,8 @@ def data_by_incident_type(incident_type):
         data['Issue Reported'].replace(to_replace=data['Issue Reported'].iloc[i],value=data['Issue Reported'].iloc[i].upper(),inplace=True)
 
     output=data[data['Issue Reported']==incident_type_lookup]
-    return(jsonify(output.to_dict()))
+    json = output.reset_index(drop=True).to_json(orient="records")
+    return(json)
 
 #pass in start date in the format YYYYMMDD e.g. 20180101
 @app.route("/api/v1.0/<start>")
