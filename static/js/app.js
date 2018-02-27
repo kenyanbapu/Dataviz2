@@ -30,7 +30,8 @@ buildDropdown()
 function buildMap() {
     var selDataset = document.getElementById("selDataset");
 
-    Plotly.d3.json("/data", function(error, data){
+
+    Plotly.d3.json('/api/v1.1', function(error, data){
         console.log(data)
 
                 })
