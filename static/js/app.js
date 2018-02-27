@@ -6,7 +6,7 @@ function init() {
     getData();
 }
 
-// Initialize the dashboard with the dropdown and the map
+// Initialize the dashboard with the dropdown and the fully populated map
 init();
 
 function buildDropdown() {
@@ -21,27 +21,26 @@ function buildDropdown() {
             selDatasetItem.value=IncidentType;
             selDataset.appendChild(selDatasetItem);
         }
-        // selDataset.addEventListener('change', e => clearMap(e.target.value))
+        selDataset.addEventListener('change', e => clearMap(e.target.value))
     }
 )}
 
 function getData() {
-    // Use a request to grab the json data needed for all charts
+    // Use a request to grab the entire data set
     Plotly.d3.json(`/data`, function(error, data) {
         if (error) return console.warn(error);
         console.log(data);
-        buildMap1(data);
+        buildMap2(data);
     });
 
 };
 function clearMap(data) {
     L.map(map.remove())
-    d3.select("#mapContainer").append("div").html('<div id="map" class="map"></div>');
     buildMap1(data);
 }
 function buildMap1(data) {
     console.log("Testing Container Build")
-    d3.select("#mapContainer").append("div").html('<div id="map" class="map"></div>');
+    // d3.select("#mapContainer").append("div").html('<div id="map" class="map"></div>');
     buildMap2(data);
 
 }
@@ -57,16 +56,15 @@ function buildMap2(data) {
         lon.push(data[i].Longitude);
         incident.push(data[i]["Issue Reported"]);
     }    
-    var map = L.map('map')
-                .setView([30.27, -97.74], 9.5);
+    var mymap = L.map('mapid').setView([30.27, -97.74], 9.5);
     
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    for (i = 0; i < data.length; i++) {     
+    }).addTo(mymap);
+    for (i = 0; i < data.length; i++) {   
         L.marker([lat[i], lon[i]])
             .bindPopup(incident[i])
-            .addTo(map);}
+            .addTo(mymap);}
 
 }
 
@@ -111,35 +109,3 @@ function reduceTime (arr) {
 
 }
 
-
-// function BuildPieChart(url) {
-
-//     Plotly.d3.json(url, function(error, data) {
-//         if (error) return console.warn(error);
-
-//        labels=[]
-//        values=[]
-//        for (i = 0; i < 9; i++) {
-//            labels.push(data['Issue Reported'][i].toString())
-//            values.push(+data['Num Incidents'][i])
-//        };
-
-//         var pieData = [{
-//             values: values,
-//             labels: labels,
-//             type: 'pie'
-//         }];
-
-//          var pieLayout = {
-//                             margin: { t: 0, l: 0 }
-//                         };        
-        
-//         var PIE = document.getElementById('pie');
-//         Plotly.plot(PIE, pieData, pieLayout);
-       
-//     });
-
-// };
-
-// BuildPieChart('/api/v1.1/pie/')
-// //BuildPieChart('/api/v1.1/pie/?start=20180101&end=20180101')
