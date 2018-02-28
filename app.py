@@ -23,7 +23,7 @@ app = Flask(__name__)
 # create route that renders index.html template
 @app.route("/")
 def home():
-    return render_template("index.html") 
+    return render_template("Protofrontend.html") 
 
 # This route returns a list of all distinct incident types (for filtering)
 @app.route("/incident_types")
