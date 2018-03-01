@@ -28,4 +28,3 @@ function BuildPieChart(url) {
 };
 
 BuildPieChart('/api/v1.1/pie/')
-//BuildPieChart('/api/v1.1/pie/?start=20180101&end=20180101')

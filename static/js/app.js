@@ -2,7 +2,7 @@
 function init() {
     getData();
     buildDropdown();
-    // buildMapdiv();
+    BuildPieChart();
     // buildCharts();
 }
 
@@ -36,33 +36,62 @@ function buildDropdown() {
                 }
     });
 
-    var selDateStart = document.getElementById("selDateStart");
+    // var selDateStart = document.getElementById("selDateStart");
     
-    Plotly.d3.json('/dates', function(error, data){
-        if (error) return console.warn(error);
-        for (i = 0; i < data.length; i++) {
-                    DateID=data[i]
-                    var selDatasetItem = document.createElement("option");
-                    selDatasetItem.text=DateID;
-                    selDatasetItem.value=DateID;
-                    selDateStart.appendChild(selDatasetItem);
-                    //selDateEnd.appendChild(selDatasetItem);
-                }
-        })
+    // Plotly.d3.json('/dates', function(error, data){
+    //     if (error) return console.warn(error);
+    //     for (i = 0; i < data.length; i++) {
+    //                 DateID=data[i]
+    //                 var selDatasetItem = document.createElement("option");
+    //                 selDatasetItem.text=DateID;
+    //                 selDatasetItem.value=DateID;
+    //                 selDateStart.appendChild(selDatasetItem);
+    //             }
+    //     })
     
-    var selDateEnd = document.getElementById("selDateEnd");
+    // var selDateEnd = document.getElementById("selDateEnd");
 
-    Plotly.d3.json('/dates', function(error, data){
+    // Plotly.d3.json('/dates', function(error, data){
+    //     if (error) return console.warn(error);
+    //     for (i = 0; i < data.length; i++) {
+    //                 DateID=data[i]
+    //                 var selDatasetItem = document.createElement("option");
+    //                 selDatasetItem.text=DateID;
+    //                 selDatasetItem.value=DateID;
+    //                 selDateEnd.appendChild(selDatasetItem);
+    //             }            
+    // })
+}
+
+function BuildPieChart() {
+
+    Plotly.d3.json('/api/v1.1/pie/', function(error, data) {
+        console.log(data);
         if (error) return console.warn(error);
-        for (i = 0; i < data.length; i++) {
-                    DateID=data[i]
-                    var selDatasetItem = document.createElement("option");
-                    selDatasetItem.text=DateID;
-                    selDatasetItem.value=DateID;
-                    selDateEnd.appendChild(selDatasetItem);
-                }            
-    }
-)}
+
+       labels=[]
+       values=[]
+       for (i = 0; i < 9; i++) {
+           labels.push(data['Issue Reported'][i].toString())
+           values.push(+data['Num Incidents'][i])
+       };
+
+        var pieData = [{
+            values: values,
+            labels: labels,
+            type: 'pie'
+        }];
+
+         var pieLayout = {
+                            margin: { t: 0, l: 0 }
+                        };        
+        
+        var PIE = document.getElementById('pie');
+        Plotly.plot(PIE, pieData, pieLayout);
+       
+    });
+
+};
 
 buildDropdown()
 
@@ -122,7 +151,7 @@ function optionChanged(incident_type) {
             }
 
             return dateArray
-        }, {})
+        })
         
     }
 
@@ -136,7 +165,7 @@ function optionChanged(incident_type) {
             }
             return timeArray
             
-        }, {})
+        })
     
     }
 
