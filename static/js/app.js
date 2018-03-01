@@ -119,7 +119,7 @@ function clearMap(data) {
 
 function buildMapdiv(data) {
     console.log("Testing Container Build")
-    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 200px; height: 200px; border: 1px solid #AAA;"></div>');
+    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>');
     buildMap(data);
 
 }
@@ -160,8 +160,8 @@ function buildMap(data) {
 
 
 
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawCurveTypes);
+// google.charts.load('current', {packages: ['corechart', 'line']});
+// google.charts.setOnLoadCallback(drawCurveTypes);
 
 function drawCurveTypes() {
     var data = new google.visualization.DataTable();
@@ -200,6 +200,6 @@ function drawCurveTypes() {
     chart.draw(data, options);
 }
 
-drawCurveTypes();
+// drawCurveTypes();
 
 
