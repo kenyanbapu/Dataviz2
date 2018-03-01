@@ -32,7 +32,7 @@ function buildDropdown() {
                     var selDatasetItem = document.createElement("option");
                     selDatasetItem.text=IncidentType;
                     selDatasetItem.value=IncidentType;
-                    selDataset.appendChild(selDatasetItem);
+                    lselDataset.appendChild(selDatasetItem);
                 }
     });
 
