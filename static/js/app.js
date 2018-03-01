@@ -34,6 +34,19 @@ function buildDropdown() {
                     selDatasetItem.value=IncidentType;
                     selDataset.appendChild(selDatasetItem);
                 }
+    });
+
+    var selStartDate = document.getElementById("selStartDate");
+    
+    Plotly.d3.json('/dates', function(error, data){
+        if (error) return console.warn(error);
+        for (i = 0; i < data.length; i++) {
+                    DateID=data[i]
+                    var selDatasetItem = document.createElement("option");
+                    selDatasetItem.text=DateID;
+                    selDatasetItem.value=DateID;
+                    selStartDate.appendChild(selDatasetItem);
+                }
                 // console.log(selDataset.addEventListener('change', e => optionChanged(e.target.value)))
     }
 )}
