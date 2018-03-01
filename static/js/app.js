@@ -103,16 +103,22 @@ function optionChanged(incident_type) {
         // Use a request to grab the json data needed for all charts
     Plotly.d3.json("/api/v1.1/", function(error, data) {
         if (error) return console.warn(error);
-        var test = []
+        var userOption = []
         data.reduce(function(all, x, index) {
             if (x['Issue Reported'].toLowerCase() == incident_type.toLowerCase()) {
-                test.push(x);
+                userOption.push(x);
             }
-            return test;
+            return userOption;
         })
+<<<<<<< HEAD
 
         console.log(reduceDate(test))
         console.log(reduceTime(test))
+=======
+    buildMapdiv(userOption)
+    console.log(reduceDate(userOption))
+    console.log(reduceTime(userOption))
+>>>>>>> d951bc71a01440c40070fe52369064de582b4089
 
 
 
@@ -147,15 +153,8 @@ function reduceTime(arr) {
 
 }
 
-
-
-function clearMap(data) {
-    L.map(mymap.remove())
-    buildMapdiv(data);
-}
-
 function buildMapdiv(data) {
-    console.log("Testing Container Build")
+    d3.select("#mapid").remove();
     d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>');
     buildMap(data);
 
@@ -176,7 +175,7 @@ function buildMap(data) {
     }
 
 
-    var mymap = L.map('mapid').setView([30.27, -97.74], 9.5);
+    var mymap = L.map('mapid').setView([30.27, -97.74], 10);
     console.log(lat)
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

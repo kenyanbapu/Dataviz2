@@ -53,6 +53,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+<<<<<<< HEAD
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -74,6 +75,39 @@
                     </div>
                 </li>
             </ul>
+=======
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <div class="col-md-9">
+              <h4>Incident Type:</h4>
+              <select class="row" id="selDataset" onchange="optionChanged(this.value)"></select>
+              <table class="table table-bordered">
+                <h4>Start Date:</h4>
+                <select class="row" id="selDateStart" onchange="startDateChanged(this.value)"></select>
+              
+                <h4>End Date:</h4>
+                <select class="row" id="selDateEnd" onchange="endDateChanged(this.value)"></select>
+                  
+                  <tbody></tbody>
+              </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Map Container-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-area-chart"></i>Map of Traffic Incidents</div>
+          <div class="card-body">
+            <div id="mapContainer">
+              <div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>
+            </div>
+          <canvas id="map" width="100%" height="50"></canvas>
+>>>>>>> d951bc71a01440c40070fe52369064de582b4089
         </div>
     </nav>
     <div class="content-wrapper">
