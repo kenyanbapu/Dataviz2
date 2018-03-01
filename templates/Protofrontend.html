@@ -2,44 +2,44 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Austin Traffic Incident Dash Board</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- Bootstrap core CSS-->
-  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="/static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="/static/css/sb-admin.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Austin Traffic Incident Dash Board</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Bootstrap core CSS-->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="/static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
-  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
 
-  <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
-  <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
-  <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
-  <!-- Import Plotly -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- Import D3 -->
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
+    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
+    <!-- Import Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Import D3 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <!-- Test -->
-  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <!-- Test -->
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawCurveTypes);
@@ -47,12 +47,35 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">City of Austin Traffic Incedents</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="index.html">City of Austin Traffic Incidents</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+<<<<<<< HEAD
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <div class="col-md-9">
+                        <h4>Incident Type:</h4>
+                        <select class="row" id="selDataset" onchange="optionChanged(this.value)"></select>
+                        <table class="table table-bordered">
+                            <h4>Start Date:</h4>
+                            <select class="row" id="selDateStart" onchange="startDateChanged(this.value)"></select>
+
+                            <h4>End Date:</h4>
+                            <select class="row" id="selDateEnd" onchange="endDateChanged(this.value)"></select>
+                            <br>
+                            <br>
+                            <button id="Reset">Reset Filters</button>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+=======
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -84,72 +107,84 @@
               <div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>
             </div>
           <canvas id="map" width="100%" height="50"></canvas>
+>>>>>>> d951bc71a01440c40070fe52369064de582b4089
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8">
-      <!-- Incidents on a 24-Hour Period Line Graph-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-area-chart"></i>Incidents on a 24-Hour Period</div>
-        <div class="card-body">
-          <canvas id="line1" width="100%" height="30">
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Map Container-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-area-chart"></i>Map of Traffic Incidents</div>
+                <div class="card-body">
+                    <div id="mapContainer"></div>
+                    <canvas id="map" width="100%" height="50"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Incidents on a 24-Hour Period Line Graph-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-area-chart"></i>Incidents on a 24-Hour Period</div>
+                        <div class="card-body">
+                            <canvas id="line1" width="100%" height="30">
             <div id="chart_div"></div>
           </canvas>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8">
-      <!-- Incidents for the Calendar Year Line Graph-->
-      <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-area-chart"></i>Incidents on a daily basis</div>
-          <div class="card-body">
-            <canvas id="line2" width="100%" height="30"></canvas>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8">
-      <!-- Example Pie Chart Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
-        <div class="card-body">
-          <div id="pie"></div>
-          <!--<canvas id="pie" width="100%" height="100"></canvas>-->
-        </div>
-      </div>
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
-        <div class="card-body">
-          <!-- put table here -->
-        </div>
-      </div>
-    </div>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Bootstrap core JavaScript-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="/static/vendor/chart.js/Chart.min.js"></script>
-    <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="/static/js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="/static/js/sb-admin-datatables.min.js"></script>
-    <script src="/static/js/sb-admin-charts.min.js"></script>
-    <script src="/static/js/app.js"></script>
-    <!-- <script src="/static/js/piechart.js"></script> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Incidents for the Calendar Year Line Graph-->
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <i class="fa fa-area-chart"></i>Incidents on a daily basis</div>
+                                <div class="card-body">
+                                    <canvas id="line2" width="100%" height="30"></canvas>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <!-- Example Pie Chart Card-->
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
+                                        <div class="card-body">
+                                            <div id="pie"></div>
+                                            <!--<canvas id="pie" width="100%" height="100"></canvas>-->
+                                        </div>
+                                    </div>
+                                    <!-- Example DataTables Card-->
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <i class="fa fa-table"></i> Data Table Example</div>
+                                        <div class="card-body">
+                                            <!-- put table here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Scroll to Top Button-->
+                                <a class="scroll-to-top rounded" href="#page-top">
+                                    <i class="fa fa-angle-up"></i>
+                                </a>
+                                <!-- Bootstrap core JavaScript-->
+                                <script src="/static/vendor/jquery/jquery.min.js"></script>
+                                <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                <!-- Core plugin JavaScript-->
+                                <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+                                <!-- Page level plugin JavaScript-->
+                                <script src="/static/vendor/chart.js/Chart.min.js"></script>
+                                <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+                                <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+                                <!-- Custom scripts for all pages-->
+                                <script src="/static/js/sb-admin.min.js"></script>
+                                <!-- Custom scripts for this page-->
+                                <script src="/static/js/sb-admin-datatables.min.js"></script>
+                                <script src="/static/js/sb-admin-charts.min.js"></script>
+                                <script src="/static/js/app.js"></script>
+                                <script src="/static/js/piechart.js"></script>
 
-  </div>
+                            </div>
 </body>
 
 </html>

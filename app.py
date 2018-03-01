@@ -85,19 +85,17 @@ def get_data():
 #It shows the top 10 incident types
 @app.route("/api/v1.1/pie/")
 def pieChartData():
-    # start = request.args.get('start', default = 00000000, type = int)
-    # end = request.args.get('end', default = 99999999, type = int)
+    start = request.args.get('start', default = 00000000, type = int)
+    end = request.args.get('end', default = 99999999, type = int)
     
-    df=pd.read_csv("DataSources/traffic_data_clean.csv")
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
 
-    # df=data[(data['Published Date as Integer']>=int(start)) & (data['Published Date as Integer']<=int(end))]
+    df=data[(data['Published Date as Integer']>=int(start)) & (data['Published Date as Integer']<=int(end))]
     
     #return top 10 incidents with counts within the date range
     top10=df[['Location','Issue Reported']].groupby(['Issue Reported']).count().sort_values('Location',ascending=False)[:10].reset_index().rename(columns={'Location':'Num Incidents'})
-    json = top10.reset_index(drop=True).to_json()
-    return(json)
-
-
+    
+    return(jsonify(top10.to_dict()))
 
 if __name__ == "__main__":
     app.run(debug=True)
