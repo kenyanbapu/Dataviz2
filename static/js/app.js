@@ -38,7 +38,6 @@ function buildDropdown() {
     }
 )}
 
-<<<<<<< HEAD
 function optionChanged(incident_type) {
     console.log(incident_type)
     // Use a request to grab the json data needed for all charts
@@ -50,30 +49,6 @@ function optionChanged(incident_type) {
                 test.push(x);
             }
             return test;
-=======
-buildDropdown()
-
-function buildMap() {
-    var selDataset = document.getElementById("selDataset");
-
-
-    Plotly.d3.json('/api/v1.1', function(error, data){
-        console.log(data)
-
-                })
-    }
-    var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-
-        view: new ol.View({
-            center: ol.proj.fromLonLat([-97.7, 30.26]),
-            zoom: 10
->>>>>>> origin
         })
 
     console.log(reduceDate(test))
@@ -121,7 +96,7 @@ function clearMap(data) {
 
 function buildMapdiv(data) {
     console.log("Testing Container Build")
-    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 200px; height: 200px; border: 1px solid #AAA;"></div>');
+    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>');
     buildMap(data);
 
 }
@@ -162,8 +137,8 @@ function buildMap(data) {
 
 
 
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawCurveTypes);
+// google.charts.load('current', {packages: ['corechart', 'line']});
+// google.charts.setOnLoadCallback(drawCurveTypes);
 
 function drawCurveTypes() {
     var data = new google.visualization.DataTable();
@@ -202,6 +177,6 @@ function drawCurveTypes() {
     chart.draw(data, options);
 }
 
-drawCurveTypes();
+// drawCurveTypes();
 
 
