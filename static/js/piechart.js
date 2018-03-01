@@ -28,9 +28,4 @@ function BuildPieChart(url) {
 };
 
 BuildPieChart('/api/v1.1/pie/')
-
 //BuildPieChart('/api/v1.1/pie/?start=20180101&end=20180101')
-
-//@TODO: once we have the dropdown working, set this up to pass in dates from the dropdown
-//BuildPieChart('/api/v1.1/pie/?start=20180101&end=20180101')
-
