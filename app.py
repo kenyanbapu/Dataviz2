@@ -24,6 +24,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("Protofrontend.html") 
+    #return render_template("index.html") 
 
 # This route returns a list of all distinct incident types (for filtering)
 @app.route("/incident_types")
@@ -34,7 +35,15 @@ def incident_types():
     incident_types=[]
     for row in incident_types_raw:
         incident_types.append(row.title())
-    return(jsonify(incident_types))    
+    return(jsonify(incident_types))  
+
+# This route returns a list of all distinct incident types (for filtering)
+@app.route("/dates")
+def dates():
+    data=pd.read_csv("DataSources/traffic_data_clean.csv")
+    dates=data['Published Date as Integer'].unique().tolist()
+    dates.sort()
+    return(jsonify(dates))   
 
 '''
 Get data with filters 
