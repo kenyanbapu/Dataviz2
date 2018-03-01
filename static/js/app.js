@@ -32,11 +32,11 @@ function buildDropdown() {
                     var selDatasetItem = document.createElement("option");
                     selDatasetItem.text=IncidentType;
                     selDatasetItem.value=IncidentType;
-                    lselDataset.appendChild(selDatasetItem);
+                    selDataset.appendChild(selDatasetItem);
                 }
     });
 
-    var selStartDate = document.getElementById("selStartDate");
+    var selDateStart = document.getElementById("selDateStart");
     
     Plotly.d3.json('/dates', function(error, data){
         if (error) return console.warn(error);
@@ -45,9 +45,22 @@ function buildDropdown() {
                     var selDatasetItem = document.createElement("option");
                     selDatasetItem.text=DateID;
                     selDatasetItem.value=DateID;
-                    selStartDate.appendChild(selDatasetItem);
+                    selDateStart.appendChild(selDatasetItem);
+                    //selDateEnd.appendChild(selDatasetItem);
                 }
-                // console.log(selDataset.addEventListener('change', e => optionChanged(e.target.value)))
+        })
+    
+    var selDateEnd = document.getElementById("selDateEnd");
+
+    Plotly.d3.json('/dates', function(error, data){
+        if (error) return console.warn(error);
+        for (i = 0; i < data.length; i++) {
+                    DateID=data[i]
+                    var selDatasetItem = document.createElement("option");
+                    selDatasetItem.text=DateID;
+                    selDatasetItem.value=DateID;
+                    selDateEnd.appendChild(selDatasetItem);
+                }            
     }
 )}
 

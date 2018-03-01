@@ -60,6 +60,12 @@
               <h4>Incident Type:</h4>
               <select class="row" id="selDataset" onchange="optionChanged(this.value)"></select>
               <table class="table table-bordered">
+                <h4>Start Date:</h4>
+                <select class="row" id="selDateStart" onchange="optionChanged(this.value)"></select>
+              
+                <h4>End Date:</h4>
+                <select class="row" id="selDateEnd" onchange="optionChanged(this.value)"></select>
+                  
                   <tbody></tbody>
               </table>
           </div>
@@ -107,7 +113,8 @@
         <div class="card-header">
           <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
         <div class="card-body">
-          <canvas id="pie" width="100%" height="100"></canvas>
+          <div id="pie"></div>
+          <!--<canvas id="pie" width="100%" height="100"></canvas>-->
         </div>
       </div>
       <!-- Example DataTables Card-->
@@ -138,6 +145,7 @@
     <script src="/static/js/sb-admin-datatables.min.js"></script>
     <script src="/static/js/sb-admin-charts.min.js"></script>
     <script src="/static/js/app.js"></script>
+    <script src="/static/js/piechart.js"></script>
 
   </div>
 </body>
