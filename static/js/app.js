@@ -45,21 +45,73 @@ function BuildPieChart() {
 
        labels=[]
        values=[]
-       for (i = 0; i < 9; i++) {
+       for (i = 0; i < 10; i++) {
            labels.push(data['Issue Reported'][i].toString())
            values.push(+data['Num Incidents'][i])
        };
 
-        var pieData = [{
-            values: values,
-            labels: labels,
-            type: 'pie'
-        }];
-
-         var pieLayout = {
-                            margin: { t: 0, l: 0 }
-                        };        
+        // var pieData = [{
+        //     values: values,
+        //     labels: labels,
+        //     type: 'pie'
+        // }];
         
+
+        var pieData = [{
+            direction: 'counterclockwise', 
+            hole: 0.7, 
+            labels: labels,
+            marker: {
+              colors: ['rgb(255, 255, 204)', 'rgb(161, 218, 180)', 'rgb(65, 182, 196)', 'rgb(44, 127, 184)', 'rgb(8, 104, 172)', 'rgb(37, 52, 148)'], 
+              line: {width: 1}
+            }, 
+            pull: 0.02, 
+            rotation: 0, 
+            sort: true, 
+            textfont: {
+              family: 'Droid Serif', 
+              size: 16
+            }, 
+            textinfo: 'percent', 
+            textposition: 'outside', 
+            type: 'pie', 
+            uid: '88d92e', 
+            values: values, 
+          }];
+
+        var pieLayout = {
+            autosize: true, 
+            font: {
+              family: '"Open Sans", verdana, arial, sans-serif', 
+              size: 15
+            }, 
+            height: 675, 
+            legend: {
+              x: 0.374001448087, 
+              y: 0.71051567555, 
+              bgcolor: 'rgb(255, 255, 255)', 
+              borderwidth: 2, 
+              font: {
+                color: '#000', 
+                family: 'Helvetica, sans-serif', 
+                size: 15
+              }, 
+              orientation: 'v'
+            }, 
+            margin: {
+              r: 10, 
+              t: 50, 
+              b: 50, 
+              l: 0
+            }, 
+            paper_bgcolor: 'rgb(255, 255, 255)', 
+            titlefont: {
+              color: '#000', 
+              family: 'Overpass', 
+              size: 58
+            }, 
+            width: 850
+          };
         var PIE = document.getElementById('pie');
         Plotly.plot(PIE, pieData, pieLayout);
        
@@ -155,3 +207,5 @@ function buildMap(data) {
     // Add our marker cluster layer to the map
     mymap.addLayer(markers);
 }
+
+
