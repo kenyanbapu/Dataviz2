@@ -4,13 +4,20 @@
   margin-top: 50px;
 }
 
+h4 {
+  text-align: center;
+  color: 	#FFFAF0
+}
+
 h2 {
   text-align: center;
 }
 
 h1 {
   text-align: center;
+  color: 	#FFFAF0
 }
+
 
 p {
   text-align: center;

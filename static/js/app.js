@@ -66,7 +66,7 @@ function buildDropdown() {
 function BuildPieChart() {
 
     Plotly.d3.json('/api/v1.1/pie/', function(error, data) {
-        console.log(data);
+        console.log("Pie Data" + data);
         if (error) return console.warn(error);
 
        labels=[]
@@ -171,7 +171,7 @@ function optionChanged(incident_type) {
 
 function buildMapdiv(data) {
     d3.select("#mapid").remove();
-    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 800px; height: 600px; border: 1px solid #AAA;"></div>');
+    d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 100%; height: 500px; border: 3px solid #AAA;"></div>');
     buildMap(data);
 
 }
