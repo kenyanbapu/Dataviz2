@@ -14,8 +14,8 @@ function getData() {
         if (error) return console.warn(error);
         // need to set timeout conditional on data loading
         buildGraphdivs(data)
-        console.log(reduceDate(data));
-        console.log(reduceTime(data));
+        console.log(parseTime(data));
+        // reduceTime(data);
     });
 };
 
@@ -126,33 +126,76 @@ function optionChanged(incident_type) {
     })
 };
 
-    function reduceDate (arr) {
-        return arr.reduce(function(dateArray, x) {
-            var dateString = new Date(x['Published Date']).toISOString().slice(0, 10)
-            if (dateArray[dateString] !== undefined) {
-                dateArray[dateString].push(x)
-            } else {
-                dateArray[dateString] = [x]
-            }
-
-            return dateArray
-        })
+function parseTime(data) {
+    var parsedTime = [];
+    for (i = 0; i < data.length; i++) { 
+        var time = new Date(data[i]["Published Date"]);
+        var hour = time.getUTCHours();
+        var day = time.getUTCDay();
+        var month = time.getUTCMonth();
+        var incident = data[i]["Issue Reported"];
+        parsedTime.push({"Incident": incident, "Hour": hour,"Day": day, "Month": month});
+        }
+    return parsedTime;
         
-    }
-
-    function reduceTime (arr) {
-        return arr.reduce(function(timeArray, x) {
-            var timeString = new Date(x['Published Date']).toISOString().slice(11,13)
-            if (timeArray[timeString] !== undefined) {
-                timeArray[timeString].push(x)
-            } else {
-                timeArray[timeString] = [x]
-            }
-            return timeArray
-            
-        })
+    buildCharts(parsedTime)
     
-    }
+    console.log(parsedTime);
+    
+}
+
+function buildCharts(data) {
+    // for (i = 0; i < data.length; i++) { 
+    //     var graphdata = {
+    //         x: [data[i][0]],
+    //         y: [data[i][1]],
+    //         type: 'bar'
+    //     };
+    //     return graphdata;
+    // }
+    // console.log(graphdata)
+    // Plotly.newPlot('myDiv', graphdata);
+
+
+
+}
+
+
+function reduceDate (arr) {
+    return arr.reduce(function(dateArray, x) {
+        var dateString = new Date(x['Published Date']).toISOString().slice(0, 10)
+        if (dateArray[dateString] !== undefined) {
+            dateArray[dateString].push(x)
+        } else {
+            dateArray[dateString] = [x]
+        }
+
+        return dateArray
+    })
+    
+}
+
+
+function reduceTime (arr) {
+    console.log(arr)
+    var byHour = []
+    console.log("By Hour:   "+ byHour);
+    arr.reduce(function(timeArray, x) {
+        var timeString = new Date(x['Published Date']).toISOString().slice(11,13)
+        if (timeArray[timeString] !== undefined) {
+            timeArray[timeString].push(x)
+        } else {
+            timeArray[timeString] = [x]
+        }
+
+        for (i = 0; i < timeArray.length; i++) { 
+            byHour.push(timeArray[key], timeArray.length)
+            console.log(byHour)}
+        return timeArray
+        
+    })
+    console.log(byHour);
+}
 
 function buildGraphdivs(data) {
     d3.select("#mapid").remove();
@@ -166,9 +209,9 @@ function buildGraphdivs(data) {
 
 function buildMap(data) {
 
-    var lat = []
-    var lon = []
-    var incident = []
+    var lat = [];
+    var lon = [];
+    var incident = [];
     
     for (i = 0; i < data.length; i++) { 
         lat.push(data[i].Latitude);
