@@ -4,22 +4,20 @@ function init() {
     buildDropdown();
     BuildPieChart();
     // buildCharts();
-}
+};
 
-init()
+init();
 
 function getData() {
     // Use a request to grab the entire data set
-    console.log("get data starting")
     Plotly.d3.json("/api/v1.1/", function(error, data) {
         if (error) return console.warn(error);
-        console.log(data)
         // need to set timeout conditional on data loading
-        buildMapdiv(data)
+        buildGraphdivs(data)
         console.log(reduceDate(data));
         console.log(reduceTime(data));
     });
-}
+};
 
 
 function buildDropdown() {
@@ -35,12 +33,10 @@ function buildDropdown() {
                     selDataset.appendChild(selDatasetItem);
                 }
     });
-}
+};
 
 function BuildPieChart() {
-    console.log("Pie Chart")
     Plotly.d3.json('/api/v1.1/pie/', function(error, data) {
-        console.log("Pie Data" + data);
         if (error) return console.warn(error);
 
        labels=[]
@@ -49,13 +45,6 @@ function BuildPieChart() {
            labels.push(data['Issue Reported'][i].toString())
            values.push(+data['Num Incidents'][i])
        };
-
-        // var pieData = [{
-        //     values: values,
-        //     labels: labels,
-        //     type: 'pie'
-        // }];
-        
 
         var pieData = [{
             direction: 'counterclockwise', 
@@ -118,8 +107,6 @@ function BuildPieChart() {
     });
 
 };
-
-buildDropdown()
      
 function optionChanged(incident_type) {
     console.log(incident_type)
@@ -132,10 +119,10 @@ function optionChanged(incident_type) {
                 userOption.push(x);
             }
             return userOption;
+            console.log(reduceDate(userOption))
+            console.log(reduceTime(userOption))
         })
-    buildMapdiv(userOption)
-    console.log(reduceDate(userOption))
-    console.log(reduceTime(userOption))
+    buildGraphdivs(userOption)
     })
 };
 
@@ -167,17 +154,18 @@ function optionChanged(incident_type) {
     
     }
 
-function buildMapdiv(data) {
+function buildGraphdivs(data) {
     d3.select("#mapid").remove();
+    d3.select("#rawData").remove();
     d3.select("#mapContainer").html('<div id="mapid" class="map" style="width: 100%; height: 500px; border: 3px solid #AAA;"></div>');
+    d3.select("#insertTable").html('<table id="rawData" class="display" width="100%"></table>');
     buildMap(data);
+    buildTable(data);
 
-}
+};
 
 function buildMap(data) {
 
-    console.log(selDataset)
-    console.log("Testing Container Build pt2")
     var lat = []
     var lon = []
     var incident = []
@@ -189,7 +177,6 @@ function buildMap(data) {
     
 
     var mymap = L.map('mapid').setView([30.27, -97.74], 10);
-    console.log(lat)
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
@@ -206,6 +193,25 @@ function buildMap(data) {
     
     // Add our marker cluster layer to the map
     mymap.addLayer(markers);
-}
+};
 
+function buildTable(data) {
+    var tableArray =[];
+    
+    for (i = 0; i < data.length; i++) { 
+        tableArray.push([data[i]["Issue Reported"], data[i]["Published Date"], data[i]["Address"], data[i]["Location"]])
+    }
+
+    $(document).ready(function() {
+        $('#rawData').DataTable( {
+            data: tableArray,
+            columns: [
+                { title: "Incident" },
+                { title: "Date" },
+                { title: "Address" },
+                { title: "Location" }
+            ]
+        } );
+    } );
+};
 
